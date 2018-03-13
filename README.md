@@ -19,11 +19,10 @@ composer require songshenzong/http-client
 ##  使用 Use
 
 ```php
- 
-        $uri = HttpClient::uri("https://api.github.com/repos/songshenzong/api", ['query' => 'string']);
+  
+        $uri = HttpClient::uri("https://api.github.com/repos/songshenzong/http-client", ['query' => 'string']);
         // https://api.github.com/repos/songshenzong/http-client?query=string
  
-  
         $response = HttpClient::request('GET', $uri);
  
         echo $response->getStatusCode();
@@ -33,14 +32,14 @@ composer require songshenzong/http-client
         // application/json; charset=utf-8
  
         echo $response->getBody();
-        // '{"id": 1420053, "name": "http-client", ...}'
+        // '{"id": 125074000, "name": "http-client", ...}'
  
         print_r($response->toArray());
         // Array
         // (
-        // [id] => 87772235
+        // [id] => 125074000
         // [name] => http-client
-        // [full_name] => songshenzong/api
+        // [full_name] => songshenzong/http-client
         // ...
         // )
  
@@ -49,7 +48,7 @@ composer require songshenzong/http-client
  
         echo $response->name;
         // http-client
- 
+         
         var_dump($response->isJson());
         // bool(true)
  
@@ -64,8 +63,9 @@ composer require songshenzong/http-client
             $response = new \Songshenzong\HttpClient\Response($response);
             echo $response['id'];
         });
-        $promise->wait();
          
+        $promise->wait();
+ 
 ```
 
 
