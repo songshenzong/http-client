@@ -37,10 +37,7 @@ echo $response->getBody();
 print_r($response->toArray());
 // Array
 // (
-// [id] => 125074000
 // [name] => http-client
-// [full_name] => songshenzong/http-client
-// ...
 // )
  
 echo $response['name'];
