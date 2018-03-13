@@ -1,0 +1,43 @@
+{
+  "name": "songshenzong/http-client",
+  "description": "cURL tool",
+  "keywords": [
+    "curl",
+    "laravel",
+    "notification"
+  ],
+  "support": {
+    "issues": "https://github.com/songshenzong/http-client/issues",
+    "source": "https://github.com/songshenzong/http-client"
+  },
+  "authors": [
+    {
+      "name": "Songshenzong",
+      "email": "i@songshenzong.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1.3",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Songshenzong\\Curl\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Songshenzong\\HttpClient\\ServiceProvider"
+      ]
+    }
+  },
+  "license": "MIT"
+}
