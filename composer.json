@@ -1,6 +1,6 @@
 {
   "name": "songshenzong/http-client",
-  "description": "cURL tool",
+  "description": "a PHP HTTP client library",
   "keywords": [
     "curl",
     "laravel",
