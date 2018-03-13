@@ -3,6 +3,7 @@
   "description": "a PHP HTTP client library",
   "keywords": [
     "curl",
+    "HTTP client",
     "laravel",
     "notification"
   ],
