@@ -20,51 +20,51 @@ composer require songshenzong/http-client
 
 ```php
   
-        $uri = HttpClient::uri("https://api.github.com/repos/songshenzong/http-client", ['query' => 'string']);
-        // https://api.github.com/repos/songshenzong/http-client?query=string
+$uri = HttpClient::uri("https://api.github.com/repos/songshenzong/http-client", ['query' => 'string']);
+// https://api.github.com/repos/songshenzong/http-client?query=string
  
-        $response = HttpClient::request('GET', $uri);
+$response = HttpClient::request('GET', $uri);
  
-        echo $response->getStatusCode();
-        // 200
+echo $response->getStatusCode();
+// 200
  
-        echo $response->getHeaderLine('content-type');
-        // application/json; charset=utf-8
+echo $response->getHeaderLine('content-type');
+// application/json; charset=utf-8
  
-        echo $response->getBody();
-        // '{"id": 125074000, "name": "http-client", ...}'
+echo $response->getBody();
+// '{"id": 125074000, "name": "http-client", ...}'
  
-        print_r($response->toArray());
-        // Array
-        // (
-        // [id] => 125074000
-        // [name] => http-client
-        // [full_name] => songshenzong/http-client
-        // ...
-        // )
+print_r($response->toArray());
+// Array
+// (
+// [id] => 125074000
+// [name] => http-client
+// [full_name] => songshenzong/http-client
+// ...
+// )
  
-        echo $response['name'];
-        // http-client
+echo $response['name'];
+// http-client
  
-        echo $response->name;
-        // http-client
-         
-        var_dump($response->isJson());
-        // bool(true)
+echo $response->name;
+// http-client
  
-        print_r($response->serialize());
-        // C:32:"Songshenzong\HttpClient\Response":5253:...
+var_dump($response->isJson());
+// bool(true)
  
-        var_dump($response->unserialize());
-        // false | object | array
+print_r($response->serialize());
+// C:32:"Songshenzong\HttpClient\Response":5253:...
  
-        // Send an asynchronous request.
-        $promise = HttpClient::sendAsync('GET', $uri)->then(function ($response) {
-            $response = new \Songshenzong\HttpClient\Response($response);
-            echo $response['id'];
-        });
-         
-        $promise->wait();
+var_dump($response->unserialize());
+// false | object | array
+ 
+// Send an asynchronous request.
+$promise = HttpClient::sendAsync('GET', $uri)->then(function ($response) {
+    $response = new \Songshenzong\HttpClient\Response($response);
+    echo $response['id'];
+});
+ 
+$promise->wait();
  
 ```
 
