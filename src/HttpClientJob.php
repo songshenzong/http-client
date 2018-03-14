@@ -21,9 +21,9 @@ class HttpClientJob implements ShouldQueue
     /**
      * HttpClientJob constructor.
      *
-     * @param        $method
-     * @param string $uri
-     * @param array  $options
+     * @param string $method
+     * @param string  $uri
+     * @param array   $options
      */
     public function __construct($method, $uri = '', array $options = [])
     {
@@ -34,9 +34,9 @@ class HttpClientJob implements ShouldQueue
     /**
      * Handle this Job
      *
-     * @return \GuzzleHttp\Psr7\Response
+     * @return Response
      */
-    public function handle(): \GuzzleHttp\Psr7\Response
+    public function handle(): Response
     {
         return HttpClient::request(...$this->parameters);
     }

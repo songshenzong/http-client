@@ -17,9 +17,9 @@ class HttpClientNotification extends Notification
     /**
      * HttpClientNotification constructor.
      *
-     * @param        $method
-     * @param string $uri
-     * @param array  $options
+     * @param  string $method
+     * @param string  $uri
+     * @param array   $options
      */
     public function __construct($method, $uri = '', array $options = [])
     {
@@ -43,7 +43,6 @@ class HttpClientNotification extends Notification
      * @param $notifiable
      *
      * @return Response
-     * @throws \InvalidArgumentException
      */
     public function toHttp($notifiable): Response
     {

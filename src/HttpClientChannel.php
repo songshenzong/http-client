@@ -16,7 +16,7 @@ class HttpClientChannel
     {
 
         /**
-         * @var \GuzzleHttp\Psr7\Response $response
+         * @var Response $response
          */
         $response = $notification->toHttp($notifiable);
 

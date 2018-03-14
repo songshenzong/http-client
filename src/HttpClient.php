@@ -2,91 +2,136 @@
 
 namespace Songshenzong\HttpClient;
 
+use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Promise\PromiseInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\UriInterface;
 use function http_build_query;
 
 /**
- * @property  method
- * @property  uri
- * @property  options
+ * Class HttpClient
+ *
+ * @package Songshenzong\HttpClient
+ *
+ * @mixin \GuzzleHttp\Client
+ *
+ * @method static Response get(string | UriInterface $uri, array $options = [])
+ * @method static Response head(string | UriInterface $uri, array $options = [])
+ * @method static Response put(string | UriInterface $uri, array $options = [])
+ * @method static Response post(string | UriInterface $uri, array $options = [])
+ * @method static Response patch(string | UriInterface $uri, array $options = [])
+ * @method static Response delete(string | UriInterface $uri, array $options = [])
+ *
+ * @method static PromiseInterface getAsync(string | UriInterface $uri, array $options = [])
+ * @method static PromiseInterface headAsync(string | UriInterface $uri, array $options = [])
+ * @method static PromiseInterface putAsync(string | UriInterface $uri, array $options = [])
+ * @method static PromiseInterface postAsync(string | UriInterface $uri, array $options = [])
+ * @method static PromiseInterface patchAsync(string | UriInterface $uri, array $options = [])
+ * @method static PromiseInterface deleteAsync(string | UriInterface $uri, array $options = [])
+ *
+ * @method static Promise sendAsync(RequestInterface $request, array $options = [])
+ * @method static Promise requestAsync($method, $uri = '', array $options = [])
+ * @method static Response send(RequestInterface $request, array $options = [])
+ * @method static Response request($method, $uri = '', array $options = [])
+ * @method static array|null getConfig($option = null)
  */
 class HttpClient
 {
 
     /**
-     * HttpClient constructor.
+     * @var \GuzzleHttp\Client $client
      */
-    private function __construct()
+    static $client;
+
+
+    /**
+     * HttpClient constructor.
+     *
+     * @param array $config
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function __construct(array $config = [])
     {
+        static::$client = new \GuzzleHttp\Client($config);
     }
 
 
     /**
-     * @param string $domain
+     * @param array $config
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function config(array $config = [])
+    {
+        static::$client = new \GuzzleHttp\Client($config);
+    }
+
+
+    /**
+     * @return \GuzzleHttp\Client
+     * @throws \InvalidArgumentException
+     */
+    private static function getClient(): \GuzzleHttp\Client
+    {
+        if (!static::$client) {
+            static::$client = new \GuzzleHttp\Client();
+        }
+        return static::$client;
+    }
+
+    /**
+     * @param string $baseUri
      * @param array  $query
      *
      * @return string
      */
-    public static function uri(string $domain, array $query = [])
+    public static function uri(string $baseUri, array $query = [])
     {
         if ($query === []) {
-            return $domain;
+            return $baseUri;
         }
-        return $domain . "?" . http_build_query($query);
+        return $baseUri . "?" . http_build_query($query);
     }
 
 
     /**
-     * @param        $method
-     * @param string $uri
-     * @param array  $options
+     * @param $name
+     * @param $arguments
      *
-     * @return Response
+     * @return Response|mixed
      * @throws \InvalidArgumentException
      */
-    public static function request(string $method, string $uri = '', array $options = []): Response
+    public function __call($name, $arguments): Response
     {
-        $client = new \GuzzleHttp\Client();
         /**
          * @var \GuzzleHttp\Psr7\Response $response
          */
-        $response = $client->request($method, $uri, $options);
-
-        return new Response($response);
+        $response = self::getClient()->$name(...$arguments);
+        if ($response instanceof \GuzzleHttp\Psr7\Response) {
+            return new Response($response);
+        }
+        return $response;
     }
 
-
     /**
-     * @param        $method
-     * @param string $uri
-     * @param array  $options
+     * @param $name
+     * @param $arguments
      *
-     * @return static
-     */
-    public static function sendAsync(string $method, string $uri = '', array $options = [])
-    {
-        $instance          = new static;
-        $instance->method  = $method;
-        $instance->uri     = $uri;
-        $instance->options = $options;
-        return $instance;
-    }
-
-
-    /**
-     * @param $function
-     *
-     * @return \GuzzleHttp\Promise\Promise
+     * @return \GuzzleHttp\Psr7\Response|Response
      * @throws \InvalidArgumentException
      */
-    public function then($function): \GuzzleHttp\Promise\Promise
+    public static function __callStatic($name, $arguments)
     {
-        $client = new \GuzzleHttp\Client();
-        // Send an asynchronous request.
-        $request = new \GuzzleHttp\Psr7\Request($this->method, $this->uri, $this->options);
         /**
-         * @var \GuzzleHttp\Promise\Promise $promise
+         * @var \GuzzleHttp\Psr7\Response $response
          */
-        $promise = $client->sendAsync($request)->then($function);
-        return $promise;
+        $response = self::getClient()->$name(...$arguments);
+        if ($response instanceof \GuzzleHttp\Psr7\Response) {
+            return new Response($response);
+        }
+        return $response;
     }
+
+
 }

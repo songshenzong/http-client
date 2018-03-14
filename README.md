@@ -1,75 +1,94 @@
 [![Songshenzong](https://cdn.songshenzong.com/images/logo.png)](https://songshenzong.com)
 
+
+
+HttpClient, extension PHP HTTP client for Guzzle
+=======================
+
 [![Total Downloads](https://poser.pugx.org/songshenzong/http-client/d/total.svg)](https://packagist.org/packages/songshenzong/http-client)
 [![Latest Stable Version](https://poser.pugx.org/songshenzong/http-client/v/stable.svg)](https://packagist.org/packages/songshenzong/http-client)
 [![License](https://poser.pugx.org/songshenzong/http-client/license.svg)](https://packagist.org/packages/songshenzong/http-client)
 [![PHP Version](https://img.shields.io/packagist/php-v/songshenzong/http-client.svg)](https://packagist.org/packages/songshenzong/http-client)
 
 
+HttpClient is a extension PHP HTTP client for Guzzle, you can use all of Guzzle's methods.
 
-## 安装 Installation
+HttpClient advantages are::
 
-Require this package with composer:
+- Use all of Guzzle's methods statically.
+- Access the `Response` as an array or object.
+- IDE tips are more friendly.
 
-```shell
-composer require songshenzong/http-client
-```
-
-
-##  使用 Use
 
 ```php
-  
-$uri = HttpClient::uri("https://api.github.com/repos/songshenzong/http-client", ['query' => 'string']);
-// https://api.github.com/repos/songshenzong/http-client?query=string
+ 
+$uri = HttpClient::uri('https://packagist.org/search.json', ['q' => 'songshenzong']);
+// https://packagist.org/search.json?q=songshenzong
  
 $response = HttpClient::request('GET', $uri);
+// $response = HttpClient::get($uri);
+// $response = HttpClient::post($uri);
+// $response = HttpClient::put($uri);
+// $response = HttpClient::delete($uri);
  
 echo $response->getStatusCode();
 // 200
  
 echo $response->getHeaderLine('content-type');
-// application/json; charset=utf-8
+// application/json
  
 echo $response->getBody();
-// '{"id": 125074000, "name": "http-client", ...}'
+// {"results":[{"name":"songshenzong...}
  
 print_r($response->toArray());
 // Array
 // (
-// [name] => http-client
+// [results] => Array
 // )
  
-echo $response['name'];
-// http-client
+echo $response['total'];
+// 12
  
-echo $response->name;
-// http-client
+echo $response->total;
+// 12
  
 var_dump($response->isJson());
 // bool(true)
  
 print_r($response->serialize());
-// C:32:"Songshenzong\HttpClient\Response":5253:...
+// s:2732:"{"results":[{"name":"songshenzong...
  
 var_dump($response->unserialize());
 // false | object | array
  
 // Send an asynchronous request.
-$promise = HttpClient::sendAsync('GET', $uri)->then(function ($response) {
+$promise = HttpClient::requestAsync('GET', $uri)->then(function ($response) {
     $response = new \Songshenzong\HttpClient\Response($response);
-    echo $response['id'];
+    echo $response['total'];
 });
  
 $promise->wait();
- 
+  
 ```
 
 
 
+## Installation
+
+Installing the latest stable version:
+
+```bash
+composer require songshenzong/http-client
+```
+
+You can update using composer:
+
+ ```bash
+composer update
+ ```
 
 
-## 队列 Laravel Queues
+## Laravel Queues
 
 ```php
 CurlJob::dispatch('GET', 'https://api.github.com/repos/songshenzong/http-client');
@@ -81,7 +100,7 @@ CurlJob::dispatchNow('GET', 'https://api.github.com/repos/songshenzong/http-clie
 
 
 
-## 消息通知 Laravel Notifications
+## Laravel Notifications
 
 ```php
 Notification::send($user, new CurlNotification('GET', 'https://api.github.com/repos/songshenzong/http-client'));
@@ -117,16 +136,19 @@ public function toHttp($notifiable)
 ```
 
 
-## 文档 Documentation
+## Documentation
 
-Please refer to our extensive [Wiki documentation](https://github.com/songshenzong/http-client/wiki) for more information.
+HttpClient is a extension PHP HTTP client for Guzzle, you can use all of Guzzle's methods.
 
+- [Guzzle Documentation](http://guzzlephp.org/)
+- [Guzzle Stack Overflow](http://stackoverflow.com/questions/tagged/guzzle)
+- [Guzzle Gitter](https://gitter.im/guzzle/guzzle)
 
-## 支持 Support
+## Support
 
 For answers you may not find in the Wiki, avoid posting issues. Feel free to ask for support on Songshenzong.com
 
 
-## 证书 License
+## License
 
 This package is licensed under the [BSD 3-Clause license](http://opensource.org/licenses/BSD-3-Clause).

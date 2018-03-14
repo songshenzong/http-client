@@ -1,9 +1,11 @@
 {
   "name": "songshenzong/http-client",
-  "description": "a PHP HTTP client library",
+  "description": "HttpClient is a extension PHP HTTP client for Guzzle",
   "keywords": [
     "HTTP client",
-    "laravel",
+    "RESTful",
+    "Guzzle",
+    "Laravel",
     "notification"
   ],
   "support": {
@@ -25,7 +27,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Songshenzong\\Curl\\": "src"
+      "Songshenzong\\HttpClient\\": "src"
     }
   },
   "autoload-dev": {
