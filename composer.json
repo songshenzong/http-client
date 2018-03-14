@@ -1,6 +1,6 @@
 {
   "name": "songshenzong/http-client",
-  "description": "HttpClient is a extension PHP HTTP client for Guzzle",
+  "description": "extension PHP HTTP client for Guzzle",
   "keywords": [
     "HTTP client",
     "RESTful",
