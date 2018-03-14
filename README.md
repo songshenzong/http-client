@@ -11,9 +11,7 @@ HttpClient, extension PHP HTTP client for Guzzle
 [![PHP Version](https://img.shields.io/packagist/php-v/songshenzong/http-client.svg)](https://packagist.org/packages/songshenzong/http-client)
 
 
-HttpClient is a extension PHP HTTP client for Guzzle, you can use all of Guzzle's methods.
-
-HttpClient advantages are::
+HttpClient is a extension PHP HTTP client for Guzzle, you can use all of Guzzle's methods and advantages are:
 
 - Use all of Guzzle's methods statically.
 - Access the `Response` as an array or object.
