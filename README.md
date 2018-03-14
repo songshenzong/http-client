@@ -17,6 +17,7 @@ HttpClient is a extension PHP HTTP client for Guzzle, you can use all of Guzzle'
 - Access the `Response` as an array or object.
 - IDE tips are more friendly.
 - Other methods, such as `uri` .
+- Support Laravel, such as `Queues`, `Notifications` .
 - Always sync with Guzzle.
 
 
