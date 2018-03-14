@@ -9,14 +9,14 @@ class ServiceProvider extends LaravelServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
     }
 
     /**
      * Register any package services.
      */
-    public function register()
+    public function register(): void
     {
     }
 }

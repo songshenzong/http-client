@@ -41,7 +41,7 @@ class HttpClient
     /**
      * @var \GuzzleHttp\Client $client
      */
-    static $client;
+    protected static $client;
 
 
     /**
@@ -62,7 +62,7 @@ class HttpClient
      *
      * @throws \InvalidArgumentException
      */
-    public function config(array $config = [])
+    public function config(array $config = []): void
     {
         static::$client = new \GuzzleHttp\Client($config);
     }
@@ -86,12 +86,12 @@ class HttpClient
      *
      * @return string
      */
-    public static function uri(string $baseUri, array $query = [])
+    public static function uri(string $baseUri, array $query = []): string
     {
         if ($query === []) {
             return $baseUri;
         }
-        return $baseUri . "?" . http_build_query($query);
+        return $baseUri . '?' . http_build_query($query);
     }
 
 

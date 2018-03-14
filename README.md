@@ -92,9 +92,11 @@ composer update
 ## Laravel Queues
 
 ```php
+ 
 CurlJob::dispatch('GET', 'https://packagist.org/search.json?q=songshenzong');
  
 CurlJob::dispatchNow('GET', 'https://packagist.org/search.json?q=songshenzong');
+ 
 ```
 
 
@@ -131,7 +133,7 @@ public function via($notifiable): array
  */
 public function toHttp($notifiable)
 {
-    return HttpClient::request('GET', 'https://packagist.org/search.json?q=songshenzong');;
+    return HttpClient::request('GET', 'https://packagist.org/search.json?q=songshenzong');
 }
 
 ```

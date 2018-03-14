@@ -23,7 +23,7 @@ class HttpClientNotification extends Notification
      */
     public function __construct($method, $uri = '', array $options = [])
     {
-        $this->parameters = func_get_args();
+        $this->parameters = \func_get_args();
     }
 
     /**

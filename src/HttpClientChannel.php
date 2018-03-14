@@ -14,12 +14,6 @@ class HttpClientChannel
      */
     public function send($notifiable, Notification $notification)
     {
-
-        /**
-         * @var Response $response
-         */
-        $response = $notification->toHttp($notifiable);
-
-        return $response;
+        return $notification->toHttp($notifiable);
     }
 }
