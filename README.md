@@ -30,15 +30,6 @@ $response = HttpClient::request('GET', $uri);
 // $response = HttpClient::put($uri);
 // $response = HttpClient::delete($uri);
  
-echo $response->getStatusCode();
-// 200
- 
-echo $response->getHeaderLine('content-type');
-// application/json
- 
-echo $response->getBody();
-// {"results":[{"name":"songshenzong...}
- 
 print_r($response->toArray());
 // Array
 // (
@@ -59,6 +50,15 @@ print_r($response->serialize());
  
 var_dump($response->unserialize());
 // false | object | array
+ 
+echo $response->getStatusCode();
+// 200
+ 
+echo $response->getHeaderLine('content-type');
+// application/json
+ 
+echo $response->getBody();
+// {"results":[{"name":"songshenzong...}
  
 // Send an asynchronous request.
 $promise = HttpClient::requestAsync('GET', $uri)->then(function ($response) {
