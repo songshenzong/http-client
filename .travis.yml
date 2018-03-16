@@ -12,7 +12,8 @@ deploy:
   provider: releases
   api_key:
     secure: rEYqVbxOM+eHl8bHTsNjzq0qHM8DQjpoR/73EDKYAKI4OFDFH6OWw72oz+u75zwn1+CCRELpMATqsRlxwOwSkcbXUu0vdFtkdk4r8tTKiJz6B/XwjZ2RKahI4CJJAWZilaTtXAUnIBw4xB+2RZ0f4QUdLGG6ueI7EueOcNRmqjqUwDhjEFwoz4qhuQJNzn/6Ubz2PqK+XVq+FE4hSzexy9GDdWVo4dnyfi215iy3i6shdvVQdYmfbmBq+VQ3XOouSk68q5tY9a//6dnlNgK1/Wak0C5VH55JzA+cTJ27PkiZFw2+OFVPRxmhH+hZfOCHID+U9ZeW0CruJ440Vsvw1j35eEcsrYByq5mDyNNVqeMEgUemnQjCrHcjIemvRe7ZPDp6/kzbl11Qpvs8kNzFqdNCAZi7UA1bmhgScFiO/nBQKGTg65ITSU08zts/kDycDmo+1kkPVDIyyDskttv0zGQN5F83sJQZxSOSSo4KCHh/562susf+rGkiYxZ54iczN7CKaYbqtF1jOOMo5iw0/5VUqMJz9jsvv9sQ7M7arHP7ULMUvc+IapWmuP0gm0kQW2GZ3joeqseGKPeUIIYv8De68u/IAAwTZzSva0JF8W8I5flJ5sNA+r1knCoTbd0PKsigsYb9vVkVJaCkWCuH5Dkr7ds5JRRA42wiml6kpM8=
-  file: README.md
+  file:
+    - "README.md"
   on:
     repo: songshenzong/http-client
     tags: true
