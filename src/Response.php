@@ -4,10 +4,10 @@ namespace Songshenzong\HttpClient;
 
 use ArrayAccess;
 use Serializable;
+use SimpleXMLElement;
+use Songshenzong\Support\Strings;
 use stdClass;
-use function is_array;
 use function serialize;
-use function unserialize;
 
 /**
  * Class Response
@@ -56,17 +56,15 @@ class Response implements ArrayAccess, Serializable
      */
     public function isJson(): bool
     {
-        $body = $this->response->getBody();
-        if ($body === '') {
-            return false;
-        }
+        return Strings::isJson((string) $this->response->getBody());
+    }
 
-        \json_decode($body);
-        if (\json_last_error()) {
-            return false;
-        }
-
-        return true;
+    /**
+     * @return bool
+     */
+    public function isXml(): bool
+    {
+        return Strings::isXml((string) $this->response->getBody());
     }
 
 
@@ -75,33 +73,15 @@ class Response implements ArrayAccess, Serializable
      */
     public function toArray(): array
     {
-        if ($this->isJson()) {
-            return json_decode($this->response->getBody(), true);
-        }
-
-        $unserialize = $this->unserialize();
-        if ($unserialize === false) {
-            return [];
-        }
-
-        if (is_array($unserialize)) {
-            return $unserialize;
-        }
-
-        return [];
-
+        return Strings::toArray((string) $this->response->getBody());
     }
 
     /**
-     * @return object
+     * @return stdClass|SimpleXMLElement
      */
     public function toObject(): object
     {
-        if ($this->isJson()) {
-            return json_decode($this->response->getBody());
-        } else {
-            return new stdClass();
-        }
+        return Strings::toObject((string) $this->response->getBody());
     }
 
 
@@ -112,16 +92,7 @@ class Response implements ArrayAccess, Serializable
      */
     public function unserialize($serialized = null)
     {
-        // Set Handle
-        set_error_handler(function () {
-        }, E_ALL);
-        $result = unserialize((string) $this->response->getBody());
-        // Restores the previous error handler function
-        restore_error_handler();
-        if ($result === false) {
-            return false;
-        }
-        return $result;
+        return Strings::unserialize((string) $this->response->getBody());
     }
 
     /**
@@ -134,6 +105,13 @@ class Response implements ArrayAccess, Serializable
         return serialize((string) $this->response->getBody());
     }
 
+    /**
+     * @return bool
+     */
+    public function isSerialized(): bool
+    {
+        return Strings::isSerialized((string) $this->response->getBody());
+    }
 
     /**
      * Determine if the given offset exists.
@@ -171,7 +149,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->responseArray[$offset] = $value;
     }
@@ -183,7 +161,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->responseArray[$offset]);
     }
@@ -195,7 +173,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return bool true if the parameter exists, false otherwise
      */
-    public function has($key)
+    public function has($key): bool
     {
         return array_key_exists($key, $this->responseArray);
     }
@@ -209,7 +187,7 @@ class Response implements ArrayAccess, Serializable
      */
     public function __isset($key)
     {
-        return !is_null($this->__get($key));
+        return null !== $this->__get($key);
     }
 
 
@@ -223,6 +201,16 @@ class Response implements ArrayAccess, Serializable
     public function __get($key)
     {
         return $this->responseArray[$key];
+    }
+
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value)
+    {
+        $this->responseArray[$name] = $value;
     }
 
 }

@@ -23,16 +23,18 @@
   ],
   "require": {
     "php": ">=7.1.3",
-    "guzzlehttp/guzzle": "^6.3"
+    "guzzlehttp/guzzle": "^6.3",
+    "songshenzong/support": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.2",
+    "phpunit/phpunit": "~7.0",
     "laravel/framework": "5.6.*"
   },
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "Songshenzong\\HttpClient\\": "src"
+      "Songshenzong\\HttpClient\\": "src",
+      "Songshenzong\\HttpClient\\Test\\": "tests"
     }
   },
   "autoload-dev": {

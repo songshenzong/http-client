@@ -43,6 +43,12 @@ echo $response->total;
 var_dump($response->isJson());
 // bool(true)
  
+var_dump($response->isXml());
+// bool(false)
+
+var_dump($response->isSerialized());
+// bool(false)
+
 print_r($response->serialize());
 // s:2732:"{"results":[{"name":"songshenzong...
  
