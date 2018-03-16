@@ -9,11 +9,12 @@ php:
 before_script:
   - curl --version
   - composer install --no-interaction --prefer-source --dev
+  - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
   - ~/.nvm/nvm.sh install v0.6.14
   - ~/.nvm/nvm.sh run v0.6.14
   - if [[ "$TRAVIS_PHP_VERSION" != "7.0" || "$TRAVIS_PHP_VERSION" != "7.1" ]]; then echo "xdebug.overload_var_dump = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini || true; fi
 
-script: make test
+script: phpunit
 
 matrix:
   allow_failures:
