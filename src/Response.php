@@ -213,4 +213,11 @@ class Response implements ArrayAccess, Serializable
         $this->responseArray[$name] = $value;
     }
 
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->response->getBody();
+    }
 }
