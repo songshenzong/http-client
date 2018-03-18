@@ -33,7 +33,7 @@ class HttpClientNotification extends Notification
      *
      * @return array
      */
-    public function via($notifiable): array
+    public function via($notifiable)
     {
         return [HttpClientChannel::class];
     }
@@ -44,7 +44,7 @@ class HttpClientNotification extends Notification
      *
      * @return Response
      */
-    public function toHttp($notifiable): Response
+    public function toHttp($notifiable)
     {
         return HttpClient::request(...$this->parameters);
     }

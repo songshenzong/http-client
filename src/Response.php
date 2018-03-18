@@ -54,7 +54,7 @@ class Response implements ArrayAccess, Serializable
     /**
      * @return bool
      */
-    public function isJson(): bool
+    public function isJson()
     {
         return Strings::isJson((string) $this->response->getBody());
     }
@@ -62,7 +62,7 @@ class Response implements ArrayAccess, Serializable
     /**
      * @return bool
      */
-    public function isXml(): bool
+    public function isXml()
     {
         return Strings::isXml((string) $this->response->getBody());
     }
@@ -71,7 +71,7 @@ class Response implements ArrayAccess, Serializable
     /**
      * @return array
      */
-    public function toArray(): array
+    public function toArray()
     {
         return Strings::toArray((string) $this->response->getBody());
     }
@@ -79,7 +79,7 @@ class Response implements ArrayAccess, Serializable
     /**
      * @return stdClass|SimpleXMLElement
      */
-    public function toObject(): object
+    public function toObject()
     {
         return Strings::toObject((string) $this->response->getBody());
     }
@@ -100,7 +100,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return string
      */
-    public function serialize(): string
+    public function serialize()
     {
         return serialize((string) $this->response->getBody());
     }
@@ -108,7 +108,7 @@ class Response implements ArrayAccess, Serializable
     /**
      * @return bool
      */
-    public function isSerialized(): bool
+    public function isSerialized()
     {
         return Strings::isSerialized((string) $this->response->getBody());
     }
@@ -120,7 +120,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return bool
      */
-    public function offsetExists($offset): bool
+    public function offsetExists($offset)
     {
         return array_key_exists(
             $offset, $this->responseArray
@@ -149,7 +149,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return void
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet($offset, $value)
     {
         $this->responseArray[$offset] = $value;
     }
@@ -161,7 +161,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return void
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset($offset)
     {
         unset($this->responseArray[$offset]);
     }
@@ -173,7 +173,7 @@ class Response implements ArrayAccess, Serializable
      *
      * @return bool true if the parameter exists, false otherwise
      */
-    public function has($key): bool
+    public function has($key)
     {
         return array_key_exists($key, $this->responseArray);
     }

@@ -36,7 +36,7 @@ class HttpClientJob implements ShouldQueue
      *
      * @return Response
      */
-    public function handle(): Response
+    public function handle()
     {
         return HttpClient::request(...$this->parameters);
     }

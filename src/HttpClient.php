@@ -62,7 +62,7 @@ class HttpClient
      *
      * @throws \InvalidArgumentException
      */
-    public function config(array $config = []): void
+    public function config(array $config = [])
     {
         static::$client = new \GuzzleHttp\Client($config);
     }
@@ -72,7 +72,7 @@ class HttpClient
      * @return \GuzzleHttp\Client
      * @throws \InvalidArgumentException
      */
-    private static function getClient(): \GuzzleHttp\Client
+    private static function getClient()
     {
         if (!static::$client) {
             static::$client = new \GuzzleHttp\Client();
@@ -86,7 +86,7 @@ class HttpClient
      *
      * @return string
      */
-    public static function uri(string $baseUri, array $query = []): string
+    public static function uri($baseUri, array $query = [])
     {
         if ($query === []) {
             return $baseUri;
@@ -102,7 +102,7 @@ class HttpClient
      * @return Response|mixed
      * @throws \InvalidArgumentException
      */
-    public function __call($name, $arguments): Response
+    public function __call($name, $arguments)
     {
         /**
          * @var \GuzzleHttp\Psr7\Response $response

@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Songshenzong\HttpClient\HttpClient;
 use Songshenzong\HttpClient\Response;
 
-
 class HttpClientTest extends TestCase
 {
     /**
@@ -24,7 +23,7 @@ class HttpClientTest extends TestCase
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testUri(): void
+    public function testUri()
     {
         static::$uri = HttpClient::uri('https://packagist.org/search.json', ['q' => 'songshenzong']);
         $this->assertEquals('https://packagist.org/search.json?q=songshenzong', static::$uri);
@@ -35,7 +34,7 @@ class HttpClientTest extends TestCase
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testIsJson(): void
+    public function testIsJson()
     {
         static::$response = HttpClient::get(static::$uri);
         $this->assertEquals(true, static::$response->isJson());
@@ -47,7 +46,7 @@ class HttpClientTest extends TestCase
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testIsXml(): void
+    public function testIsXml()
     {
         $this->assertEquals(false, static::$response->isXml());
     }
@@ -57,7 +56,7 @@ class HttpClientTest extends TestCase
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testToArray(): void
+    public function testToArray()
     {
         $this->assertArrayHasKey('total', static::$response->toArray());
         unset(static::$response['total']);
@@ -73,7 +72,7 @@ class HttpClientTest extends TestCase
      * @throws \PHPUnit\Framework\ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testToObject(): void
+    public function testToObject()
     {
         $this->assertObjectHasAttribute('total', static::$response->toObject());
     }
