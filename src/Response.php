@@ -106,7 +106,11 @@ class Response implements ArrayAccess, Serializable
      */
     public function serialize()
     {
-        return serialize((string) $this->response->getBody());
+        if ($this->response) {
+            return serialize((string) $this->response->getBody());
+        }
+
+        return serialize(null);
     }
 
     /**
