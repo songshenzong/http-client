@@ -92,7 +92,11 @@ class Response implements ArrayAccess, Serializable
      */
     public function unserialize($serialized = null)
     {
-        return Strings::unserialize((string) $this->response->getBody());
+        if ($this->response) {
+            return Strings::unserialize((string) $this->response->getBody());
+        }
+
+        return null;
     }
 
     /**
