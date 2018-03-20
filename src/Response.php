@@ -7,7 +7,6 @@ use Serializable;
 use SimpleXMLElement;
 use Songshenzong\Support\Strings;
 use stdClass;
-use function serialize;
 
 /**
  * Class Response
