@@ -8,6 +8,7 @@ use Songshenzong\HttpClient\Response;
 
 class HttpClientTest extends TestCase
 {
+
     /**
      * @var string
      */

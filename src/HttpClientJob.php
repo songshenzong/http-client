@@ -21,8 +21,8 @@ class HttpClientJob implements ShouldQueue
      * HttpClientJob constructor.
      *
      * @param string $method
-     * @param string  $uri
-     * @param array   $options
+     * @param string $uri
+     * @param array  $options
      */
     public function __construct($method, $uri = '', array $options = [])
     {
@@ -39,6 +39,5 @@ class HttpClientJob implements ShouldQueue
     {
         return HttpClient::request(...$this->parameters);
     }
-
 
 }
